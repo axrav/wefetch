@@ -8,10 +8,6 @@ cgreen='\033[0;32m'
 cyellow='\033[0;33m'
 cwhite='\033[0;37m'
 cpurple='\033[0;35m'
-#bg
-cwhite='\033[0;37m'
-cpurple='\033[0;35m'
-
 # distro info
 
 distro()
