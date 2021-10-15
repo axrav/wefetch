@@ -21,7 +21,7 @@ Tested with:
 
 ## Installation
 
-Just clone the repository and copy [wefetch](https://github.com/vegetaxd/wefetch/blob/main/wefetch) to one of the system path to make it working
+Just clone the repository and copy [wefetch](https://github.com/vegetaxd/wefetch/blob/main/wefetch) to one of the system path and make it executable to make it working
 
 Make sure you copy the fonts directory to ``~/.local/share/fonts`` to make icons visible
 
