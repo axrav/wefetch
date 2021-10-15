@@ -73,7 +73,7 @@ stats()
 |____/  \/\_/ |____/|___  /____/|___|  /__| |____/                 $cblue    $cyellow $package
                         \/           \/                              $cblue  $cred $display
                                                                      $cblue  $cgreen $wshell
-    $cblue There is no better place then *nix 󰮯                      $cblue        $cyellow $ram_in
+    $cblue There is no better place than *nix 󰮯                      $cblue        $cyellow $ram_in
     
     """
   
