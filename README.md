@@ -24,7 +24,9 @@ Tested with:
 Just clone the repository and copy [wefetch](https://github.com/vegetaxd/wefetch/blob/main/wefetch) to one of the system path to make it working
 
 ## Why use Pfetch?
-Fastest amoung all
+
+Fastest Among All
+
 ![alt text](https://github.com/VegetaxD/wefetch/blob/main/screens/fastest.png)
 ### Screens
 ![alt text](https://github.com/VegetaxD/wefetch/blob/main/screens/arch.png)
