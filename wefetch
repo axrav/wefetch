@@ -92,7 +92,7 @@ stats()
     
     """
   
-  elif [[ $PRETTY_NAME == *"Void"* ]];
+  elif [[ $PRETTY_NAME == *"void"* ]];
   then
     stats=$cblue"""
                                                       $about@wefetch
