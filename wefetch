@@ -1,0 +1,339 @@
+#!/bin/bash
+
+# Colors
+#fg
+cred='\033[0;31m'
+cblue='\033[0;34m'
+cgreen='\033[0;32m'
+cyellow='\033[0;33m'
+cwhite='\033[0;37m'
+cpurple='\033[0;35m'
+#bg
+cwhite='\033[0;37m'
+cpurple='\033[0;35m'
+
+# distro info
+
+distro()
+{
+
+ . /etc/os-release
+
+ name=${PRETTY_NAME}
+
+}
+# DE/WM
+display=$DESKTOP_SESSION
+
+# Kernel
+ker=$(uname -r)
+
+
+#User
+about=$(whoami)
+
+#Shell
+wshell=$(basename $SHELL)
+
+#Package Manager
+package=$(which {pacman,apk,apt,dnf,nix,dpkg,rpm,emerge,xbps-install} 2>&1 | grep -v "^which" | sed 's_.*/__')
+
+#Uptime
+up=$(uptime -p | sed 's/up//1;s/ mo..../mo/1;s/ w.../w/1;s/ d.../d/1;s/ m....../min/1;s/ h..../h/1;s/ mo.../mo/1;s/ w.../w/1;s/ d../d/1;s/ m...../m/1;s/ h.../h/1;s/\, /\,/1;s/\, /\,/2;s/\, /\,/3;s/\, /\,/')
+
+# RAM
+tram=$(free -m | grep Mem | awk '{print $2}')
+
+uram=$(free -m | grep Mem | awk '{print $3}')
+
+ram_in="$uram M/$tram M"
+
+# Stats according to distro
+stats()
+{
+  if [[ $PRETTY_NAME == *"Arch Linux"* ]];
+  then
+    stats=$cblue"""     
+                                                                 $about@wefetch
+
+        _             _       _     _                            󰣇 $cgreen $PRETTY_NAME
+       / \   _ __ ___| |__   | |__ | |___      __                 $cyellow $ker    
+      / _ \ | '__/ __| '_ \  | '_ \| __\ \ /\ / /             $cblue    $cred$up    
+     / ___ \| | | (__| | | | | |_) | |_ \ V  V /              $cblue    $cyellow $package 
+    /_/   \_\_|  \___|_| |_| |_.__/ \__| \_/\_/               $cblue    $cred $display
+                                                            $cblue      $cgreen $wshell
+    $cblue Arch BTW! 󰮯                                          $cblue        $cyellow $ram_in
+    
+    """
+  
+  elif [[ $PRETTY_NAME == *"Ubuntu"* ]];
+  then
+    stats=$cblue"""
+                                                                      $about@wefetch
+                   ___.                 __
+ __ ____  _  ____ _\_ |__  __ __  _____/  |_ __ __                   $cred  $cgreen $PRETTY_NAME
+|  |  \ \/ \/ /  |  \ __ \|  |  \/    \   __|  |  \                    $cyellow $ker
+|  |  /\     /|  |  / \_\ \  |  /   |  \  | |  |  /                  $cblue  $cred$up
+|____/  \/\_/ |____/|___  /____/|___|  /__| |____/                 $cblue    $cyellow $package
+                        \/           \/                              $cblue  $cred $display
+                                                                     $cblue  $cgreen $wshell
+    $cblue There is no better place then *nix 󰮯                      $cblue        $cyellow $ram_in
+    
+    """
+  
+  elif [[ $PRETTY_NAME == *"Debian"* ]];
+  then
+    stats=$cblue"""                                                                      
+                                                                      $about@wefetch
+          __          __             __     __
+     ____/ /  ___    / /_           / /_   / /_ _      __            $cred  $cgreen $PRETTY_NAME 
+    / __  /  / _ \  / __ \         / __ \ / __/| | /| / /              $cyellow $ker
+ _ / /_/ /  /  __/ / /_/ /        / /_/ // /_  | |/ |/ /             $cblue  $cred$up
+(_)\__,_/   \___/ /_.___/        /_.___/ \__/  |__/|__/            $cblue    $cyellow $package
+                                                                     $cblue  $cred $display
+                                                                     $cblue  $cgreen $wshell
+    $cblue There is no better place than *nix 󰮯                      $cblue        $cyellow $ram_in
+    
+    """
+  
+  elif [[ $PRETTY_NAME == *"Void"* ]];
+  then
+    stats=$cblue"""
+                                                      $about@wefetch
+     _    __     _      ___                               
+    | |  / /___ (_)____/  /                          $cred 󰋜 $cgreen $PRETTY_NAME
+    | | / / __ \/ /  __  /                             $cyellow $ker
+    | |/ / /_/ / /  /_/ /                            $cblue  $cred$up
+    |___/_____/_/ \__,_/                           $cblue    $cyellow $package
+                                                     $cblue  $cred $display
+                                                     $cblue  $cgreen $wshell
+    $cblue Enter The Void! 󰮯                                 $cyellow $ram_in
+    
+    """
+  
+  elif [[ $PRETTY_NAME == *"Pop"* ]];
+  then
+    stats=$cblue"""
+                                                      $about@wefetch         
+    ____            ____     __
+   / __ \  ____    / __ \   / /                      $cred 󰋜 $cgreen $PRETTY_NAME
+  / /_/ / / __ \  / /_/ /  / /                         $cyellow $ker
+ / ____/ / /_/ / / ____/  /_/                        $cblue  $cred$up  
+/_/      \____/ /_/      (_)                       $cblue    $cyellow $package
+                                                     $cblue  $cred $display
+                                                     $cblue  $cgreen $wshell
+    $cblue There is no better place than *nix 󰮯              $cyellow $ram_in
+   
+   """
+  
+  elif [[ $PRETTY_NAME == *"Elementary"* ]];
+  then
+    stats=$cblue"""
+                                                $about@wefetch
+          _______
+	 / ____  \\                             $cred 󰋜 $cgreen $PRETTY_NAME
+	/  |  /  /\\                              $cyellow $ker
+	|__\\ /  / |                            $cblue  $cred$up 
+	\\   /__/  /                          $cblue    $cyellow $package
+	 \\_______/                             $cblue  $cred $display
+                                               $cblue  $cgreen $wshell
+   $cblue There is no better place than *nix 󰮯         $cyellow $ram_in
+    
+    """
+  
+  elif [[ $PRETTY_NAME == *"Gentoo"* ]];
+  then
+    stats=$cblue"""
+                                                        $about@wefetch
+   ______                 __    ____        
+  / ____/  ___    ____   / /_  / __ \  ____            $cred 󰋜 $cgreen $PRETTY_NAME
+ / / __   / _ \  / __ \ / __/ / / / / / __ \             $cyellow $ker
+/ /_/ /  /  __/ / / / // /_  / /_/ / / /_/ /           $cblue  $cred$up
+\____/   \___/ /_/ /_/ \__/  \____/  \____/          $cblue    $cyellow $package
+                                                       $cblue  $cred $display
+                                                       $cblue  $cgreen $wshell
+   $cblue Still Compiling!  󰮯                                  $cyellow $ram_in
+    
+    """
+  
+  elif [[ $PRETTY_NAME == *"Alpine"* ]];
+  then
+    stats=$cblue"""                                           
+                                                        $about@wefetch
+    
+    ___     __              _     _   __               $cgreen   $PRETTY_NAME
+   /   |   / /     ____    (_)   / | / /  ___            $cyellow $ker
+  / /| |  / /     / __ \  / /   /  |/ /  / _ \         $cblue  $cred$up
+ / ___ | / /___  / /_/ / / /   / /|  /  /  __/       $cblue    $cyellow $package
+/_/  |_|/_____/ / .___/ /_/   /_/ |_/   \___/          $cblue  $cred $display
+               /_/                                     $cblue  $cgreen $wshell
+                                                        $cblue $cyellow $ram_in
+   $cblue There is no better place than *nix 󰮯                             
+    
+    """
+  
+  elif [[ $PRETTY_NAME == *"Archcraft"* ]];
+  then
+    stats=$cblue"""
+                                                        $about@wefetch          
+              ___   
+             /   \                                     $cgreen 󰋜  $PRETTY_NAME
+            /  _  \                                      $cyellow $ker
+           /  / \  \                                   $cblue  $cred$up
+          /  /   \  \                                $cblue    $cyellow $package   
+         /  /_____\  \                                 $cblue  $cred $display
+        /  /_______\  \                                $cblue  $cgreen $wshell
+       /__/         \__\                                $cblue $cyellow $ram_in
+    
+     $cblue There is no better place than *nix 󰮯
+  
+  """
+  
+  elif [[ $PRETTY_NAME == *"Parrot"* ]];
+  then
+    stats=$cblue"""
+    
+            _                                             
+          /\ '\                                            $about@wefetch
+        /| @   \                                      
+        \|      \                                         $cgreen 󱗆  $PRETTY_NAME
+          \      \_                                         $cyellow $ker
+           \    __ \                                      $cblue  $cred$up
+            l  \    \                                   $cblue    $cyellow $package
+            \   \./  \                                    $cblue  $cred $display
+              \ ____ /\                                   $cblue  $cgreen $wshell
+                ||  || \                                   $cblue $cyellow $ram_in
+        -------(((-(((----------
+                         \       $cblue There is no better place than *nix 󰮯                   
+                                     
+    """
+  
+  elif [[ $PRETTY_NAME == *"Garuda"* ]];
+  then
+    stats=$cblue"""   
+                     
+            o888888o.                                 $about@wefetch    
+          888888888888.  
+        888          8.                             $cgreen 󰋜  $PRETTY_NAME
+        8888                                          $cyellow $ker
+        8888                                        $cblue  $cred$up
+        8888                                      $cblue    $cyellow $package
+        8888     8888888                            $cblue  $cred $display
+        888         .8                              $cblue  $cgreen $wshell
+          8888      88                               $cblue $cyellow $ram_in
+            8888888P     
+
+    $cblue There is no better place than *nix 󰮯
+
+    """
+  
+  elif [[ $PRETTY_NAME == *"Manjaro"* ]];
+  then
+    stats=$cblue"""
+                                                                
+          
+          .         .                                   
+         8.         8.                                  $about@wefetch 
+        888.       888.                                 
+       .8888.    . 8888.                               $cgreen   $PRETTY_NAME
+       8.8888.   8. 8888.                                $cyellow $ker
+      8 8.8888  8^8. 8888.                             $cblue  $cred$up
+     8    8.88888  8. 8888.                          $cblue    $cyellow $package 
+    8      8.8888   8. 8888.                           $cblue  $cred $display
+   8        8.8      8. 8888.                          $cblue  $cgreen $wshell
+  8          88       8. 8888.                          $cblue $cyellow $ram_in
+ 8            8        8. 8888.
+    
+    $cblue There is no better place than *nix 󰮯
+  
+    """
+  
+  elif [[ $PRETTY_NAME == *"Kali"* ]];
+  then
+    stats=$cblue"""
+                                                      $about@wefetch                  
+ __  ___      ___       __       __                   
+|  |/  /     /   \     |  |     |  |                $cgreen 󰋜  $PRETTY_NAME    
+|  |  /     /  ^  \    |  |     |  |                  $cyellow $ker
+|    <     /  /_\  \   |  |     |  |                $cblue  $cred$up
+|  .  \   /  _____  \  |  \----.|  |              $cblue    $cyellow $package 
+|__|\__\ /__/     \__\ |_______||__|                $cblue  $cred $display
+                                                    $cblue  $cgreen $wshell
+    $cblue And The Work Starts Here!󰮯                      $cblue $cyellow $ram_in
+
+    """
+  
+  elif [[ $PRETTY_NAME == *"Linux Mint"* ]];
+  then
+    stats=$cblue"""
+                                                        $about@wefetch
+    __  ___    _            __     __
+   /  |/  /   (_)   ____   / /_   / /                   $cgreen   $PRETTY_NAME
+  / /|_/ /   / /   / __ \ / __/  / /                      $cyellow $ker
+ / /  / /   / /   / / / // /_   /_/                     $cblue  $cred$up
+/_/  /_/   /_/   /_/ /_/ \__/  (_)                    $cblue    $cyellow $package
+                                                        $cblue  $cred $display
+                                                        $cblue  $cgreen $wshell
+    $cblue There is no better place than *nix 󰮯                $cblue $cyellow $ram_in
+    
+    """
+  
+  elif [[ $PRETTY_NAME == *"Endeavour"* ]];
+  then
+    stats=$cblue"""
+                                                       $about@wefetch   
+    ______               __    __
+   / ____/   ____   ____/ /   / /                      $cred 󰋜  $PRETTY_NAME
+  / __/     / __ \ / __  /   / /                         $cyellow $ker
+ / /___    / / / // /_/ /   /_/                        $cblue  $cred$up
+/_____/   /_/ /_/ \__,_/   (_)                       $cblue    $cyellow $package
+                                                       $cblue  $cred $display
+                                                       $cblue  $cgreen $wshell
+$cblue There is no better place than *nix 󰮯                   $cblue $cyellow $ram_in
+    
+    """ 
+  
+  elif [[ $PRETTY_NAME == *"NixOS"* ]];
+  then
+    stats=$cblue"""
+                                                          $about@wefetch
+    _   __    _    _  __    __
+   / | / /   (_)  | |/ /   / /                            $cred   $PRETTY_NAME
+  /  |/ /   / /   |   /   / /                               $cyellow $ker
+ / /|  /   / /   /   |   /_/                              $cblue  $cred$up
+/_/ |_/   /_/   /_/|_|  (_)                             $cblue    $cyellow $package 
+                                                          $cblue  $cred $display
+                                                          $cblue  $cgreen $wshell
+    $cblue There is no better place than *nix 󰮯                  $cblue $cyellow $ram_in
+
+    """
+  
+  else
+    stats=$cblue"""
+              a8888b.                             
+             d888888b.                                     $about@wefetch
+             8P\YP/Y88                              
+             8|o||o|88                                    $cred   $PRETTY_NAME
+             8     .88                                      $cyellow $ker
+             8/._. \Y8.                                   $cblue  $cred$up
+            d/      \8b.                                $cblue    $cyellow $package 
+          .dP   .    \Y8b.                                $cblue  $cred $display
+         d8:    |   ::88b.                                $cblue  $cgreen $wshell
+        d8/           \Y88b                                $cblue $cyellow $ram_in
+       :8P     |       :888
+        8a.    :      _/\8P/\  
+      ._/\Yaa_ :    .|   \/ |
+      \    YP       .|     ..   $cblue There is no better place than *nix 󰮯 
+      /     \._____.d|    ..
+      \--..__\888888P.._./
+
+
+    """ 
+  fi        
+  printf "$stats"
+}
+distro
+stats
+
+
+
