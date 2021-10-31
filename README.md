@@ -25,7 +25,7 @@ Just clone the repository and copy [wefetch](https://github.com/vegetaxd/wefetch
 
 Make sure you copy the fonts directory to ``~/.local/share/fonts`` to make icons visible
 
-## Why use Pfetch?
+## Why use WeFetch?
 
 Fastest Among All
 
